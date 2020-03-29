@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="361.0" prefWidth="337.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.Controller">
+    <children>
+        <GridPane layoutX="50.0" layoutY="32.0" prefHeight="292.0" prefWidth="308.0">
+            <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="137.0" minWidth="10.0" prefWidth="137.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="130.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="30.0" minHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="30.0" minHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="30.0" minHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="30.0" minHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="30.0" minHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="30.0" minHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="30.0" minHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="60.0" minHeight="9.0" prefHeight="12.0" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <TextField fx:id="regUsernameField" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                <TextField fx:id="regEmailField" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                <PasswordField fx:id="regPasswordField" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                <PasswordField fx:id="regPasswordField1" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                <Label fx:id="regErrorField" textFill="RED" wrapText="true" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7">
+               <GridPane.margin>
+                  <Insets left="10.0" right="10.0" />
+               </GridPane.margin></Label>
+                <Button fx:id="regRegisterButton" mnemonicParsing="false" onAction="#registrationErrorCheck" prefHeight="25.0" prefWidth="84.0" text="Register" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+                <Label prefHeight="17.0" prefWidth="121.0" text="E-mail" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label prefHeight="17.0" prefWidth="125.0" text="Username" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label prefHeight="17.0" prefWidth="121.0" text="Password" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Label prefHeight="17.0" prefWidth="121.0" text="Confirm Password" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <Label text="Registration" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+                <Button fx:id="regBackButton" mnemonicParsing="false" onAction="#loadLogin" prefHeight="25.0" prefWidth="84.0" text="Back" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+                <ImageView fx:id="regCheckIcon1" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                <ImageView fx:id="regCheckIcon2" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                <ImageView fx:id="regCheckIcon3" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                <ImageView fx:id="regCheckIcon4" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                <Label prefHeight="17.0" prefWidth="121.0" text="Admin rights" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <CheckBox fx:id="regAdminRightsCheckbox" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            </children>
+        </GridPane>
+    </children>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+</GridPane>

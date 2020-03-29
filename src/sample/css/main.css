@@ -1,0 +1,19 @@
+
+#new_offer {
+    -fx-text-fill: linear-gradient(to right, #f00, #ff0, #0f0, #00f);
+    -fx-background-color: transparent;
+    -fx-background-size: 1000%;
+    -fx-animated: animate 20s linear infinite;
+}
+@keyframes animate {
+    0% {
+        -fx-background-position: 0% 100%;
+    }
+    50% {
+        -fx-background-position: 100% 0%;
+    }
+    100% {
+        -fx-background-position: 0% 100%;
+    }
+
+}

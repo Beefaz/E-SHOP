@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.Controller">
+   <center>
+        <GridPane alignment="center" prefHeight="340.0" prefWidth="337.0" BorderPane.alignment="CENTER">
+            <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="30.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="100.0" prefWidth="200.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="100.0" prefWidth="200.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="30.0" />
+            </columnConstraints>
+            <rowConstraints>
+            <RowConstraints maxHeight="30.0" minHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="30.0" minHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="30.0" minHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="30.0" minHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="60.0" minHeight="9.0" prefHeight="12.0" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label text="Welcome to E-Shop" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+                <Label text="Username/Email" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="logUsernameField" onKeyTyped="#checkValidTypingOfUsername" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                <Label text="Password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <PasswordField fx:id="logPasswordField" onKeyTyped="#checkValidTypingOfPassword" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                <Label fx:id="logErrorField" alignment="CENTER" textFill="RED" wrapText="true" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets left="10.0" right="10.0" />
+               </GridPane.margin></Label>
+                <Button fx:id="logLoginButton" mnemonicParsing="false" onAction="#loginErrorCheck" prefHeight="25.0" prefWidth="84.0" text="Log in" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                <Button fx:id="logRegisterButton" mnemonicParsing="false" onAction="#loadRegistration" prefHeight="25.0" prefWidth="84.0" text="Register" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <ImageView fx:id="logImageForUsername" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+               <viewport>
+                  <Rectangle2D minX="15.0" minY="15.0" />
+               </viewport>
+            </ImageView>
+            <ImageView fx:id="logImageForPassword" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+               <viewport>
+                  <Rectangle2D minX="15.0" minY="15.0" />
+               </viewport></ImageView>
+            </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+        </GridPane>
+   </center>
+</BorderPane>

@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.Controller">
+   <center>
+      <FlowPane prefWrapLength="420.0" BorderPane.alignment="CENTER">
+         <children>
+                     <Pane>
+                         <children>
+                             <VBox layoutX="5.0" layoutY="14.0" prefWidth="420.0">
+                                 <children>
+                                     <Label text="Prekės pavadinimas">
+                                         <font>
+                                             <Font name="Times New Roman" size="18.0" />
+                                         </font>
+                                         <VBox.margin>
+                                             <Insets bottom="5.0" />
+                                         </VBox.margin>
+                                     </Label>
+                                     <TextField fx:id="dashTeamName" prefWidth="420.0">
+                                         <VBox.margin>
+                                             <Insets bottom="10.0" />
+                                         </VBox.margin>
+                                     </TextField>
+                                     <GridPane prefHeight="40.0" prefWidth="300.0">
+                                         <columnConstraints>
+                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="210.0" />
+                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="210.0" />
+                                         </columnConstraints>
+                                         <rowConstraints>
+                                             <RowConstraints vgrow="SOMETIMES" />
+                                             <RowConstraints vgrow="ALWAYS" />
+                                         </rowConstraints>
+                                         <children>
+                                             <Label text="Vardas">
+                                                 <font>
+                                                     <Font name="Times New Roman" size="18.0" />
+                                                 </font>
+                                 <GridPane.margin>
+                                    <Insets right="5.0" />
+                                 </GridPane.margin>
+                                             </Label>
+                                             <Label text="Pavardė" GridPane.columnIndex="1">
+                                                 <font>
+                                                     <Font name="Times New Roman" size="18.0" />
+                                                 </font>
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                                             </Label>
+                                             <TextField fx:id="dashName" promptText="  " GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets right="5.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                                             <TextField fx:id="dashSurname" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                                         </children>
+                                         <VBox.margin>
+                                             <Insets bottom="10.0" />
+                                         </VBox.margin>
+                                     </GridPane>
+                                     <Label text="Prekės kategorija">
+                                         <font>
+                                             <Font name="Times New Roman" size="18.0" />
+                                         </font>
+                                         <VBox.margin>
+                                             <Insets bottom="5.0" />
+                                         </VBox.margin>
+                                     </Label>
+                        <FlowPane VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                           <children>
+                                           <GridPane prefWidth="420.0">
+                                               <columnConstraints>
+                                                   <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="210.0" />
+                                                   <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="210.0" />
+                                               </columnConstraints>
+                                               <rowConstraints>
+                                                   <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="ALWAYS" />
+                                                   <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                               </rowConstraints>
+                                               <children>
+                                                   <CheckBox fx:id="checkBox2" mnemonicParsing="false" text="Kompiuterinė technika" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                                                       <GridPane.margin>
+                                                           <Insets />
+                                                       </GridPane.margin>
+                                                   </CheckBox>
+                                                   <CheckBox fx:id="checkBox3" mnemonicParsing="false" text="Buitinė technika ir kita elektronika" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                                                       <GridPane.margin>
+                                                           <Insets />
+                                                       </GridPane.margin>
+                                                   </CheckBox>
+                                                   <CheckBox fx:id="checkBox4" mnemonicParsing="false" text="Kvepalai, kosmetika" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                       <GridPane.margin>
+                                                           <Insets />
+                                                       </GridPane.margin>
+                                                   </CheckBox>
+                                                   <CheckBox fx:id="checkBox1" mnemonicParsing="false" text="Audio bei video aparatūra  " GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                                                       <GridPane.margin>
+                                                           <Insets bottom="3.0" />
+                                                       </GridPane.margin>
+                                                   </CheckBox>
+                                               </children>
+                                           </GridPane>
+                              <GridPane layoutX="10.0" layoutY="10.0" prefWidth="420.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="210.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="210.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="ALWAYS" />
+                                    <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <CheckBox fx:id="checkBox7" mnemonicParsing="false" text="Sportas, laisvalaikis, turizmas" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </CheckBox>
+                                    <CheckBox fx:id="checkBox6" mnemonicParsing="false" text="Automobilių prekės" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </CheckBox>
+                                    <CheckBox fx:id="checkBox8" mnemonicParsing="false" text="Kvepalai, kosmetika" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </CheckBox>
+                                    <CheckBox fx:id="checkBox5" mnemonicParsing="false" text="Mobilieji telefonai ir jų priedai" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                                       <GridPane.margin>
+                                          <Insets bottom="3.0" />
+                                       </GridPane.margin>
+                                    </CheckBox>
+                                 </children>
+                              </GridPane>
+                              <GridPane layoutX="10.0" layoutY="70.0" prefWidth="420.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="210.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="210.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="ALWAYS" />
+                                    <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <CheckBox fx:id="checkBox11" mnemonicParsing="false" text="Prekės gyvūnams" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </CheckBox>
+                                    <CheckBox fx:id="checkBox10" mnemonicParsing="false" text="Dovanos, šventinė atributika" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </CheckBox>
+                                    <CheckBox fx:id="checkBox12" mnemonicParsing="false" text="Apranga, laikrodžiai, aksesuarai" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </CheckBox>
+                                    <CheckBox fx:id="checkBox9" mnemonicParsing="false" text="Baldai, namų interjeras" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                                       <GridPane.margin>
+                                          <Insets bottom="3.0" />
+                                       </GridPane.margin>
+                                    </CheckBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </FlowPane>
+                                     <Label text="Food for thought...">
+                                         <font>
+                                             <Font name="Times New Roman" size="18.0" />
+                                         </font>
+                                         <VBox.margin>
+                                             <Insets bottom="5.0" />
+                                         </VBox.margin>
+                                     </Label>
+                                     <GridPane>
+                                         <columnConstraints>
+                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                         </columnConstraints>
+                                         <rowConstraints>
+                                             <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                         </rowConstraints>
+                                         <children>
+                                             <RadioButton fx:id="radioButton1" mnemonicParsing="false" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+                                             <RadioButton fx:id="radioButton2" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+                                             <RadioButton fx:id="radioButton3" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+                                             <RadioButton fx:id="radioButton4" mnemonicParsing="false" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                         </children>
+                                         <VBox.margin>
+                                             <Insets bottom="10.0" />
+                                         </VBox.margin>
+                                     </GridPane>
+                                     <Label text="Skelbimo trukmė">
+                                         <font>
+                                             <Font name="Times New Roman" size="18.0" />
+                                         </font>
+                                         <VBox.margin>
+                                             <Insets bottom="5.0" />
+                                         </VBox.margin>
+                                     </Label>
+                                     <ComboBox fx:id="dashTeamMembersCombobox" prefWidth="420.0" visibleRowCount="5">
+                                         <items>
+                                             <FXCollections fx:factory="observableArrayList">
+                                                 <String fx:value="1" />
+                                                 <String fx:value="2" />
+                                                 <String fx:value="3" />
+                                                 <String fx:value="4" />
+                                                 <String fx:value="5" />
+                                             </FXCollections>
+                                         </items>
+                                         <VBox.margin>
+                                             <Insets bottom="125.0" />
+                                         </VBox.margin>
+                                     </ComboBox>
+                                     <GridPane prefHeight="26.0" prefWidth="329.0" VBox.vgrow="ALWAYS">
+                                         <columnConstraints>
+                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="70.0" />
+                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="70.0" />
+                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="70.0" />
+                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="70.0" />
+                                         </columnConstraints>
+                                         <rowConstraints>
+                                             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                         </rowConstraints>
+                                         <children>
+                                             <Button fx:id="dashCreateButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Create" GridPane.halignment="CENTER">
+                                                 <font>
+                                                     <Font name="Times New Roman" size="14.0" />
+                                                 </font>
+                                                 <GridPane.margin>
+                                                     <Insets left="5.0" right="5.0" />
+                                                 </GridPane.margin>
+                                             </Button>
+                                             <Button fx:id="dashSearchButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Search" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                                                 <font>
+                                                     <Font name="Times New Roman" size="14.0" />
+                                                 </font>
+                                                 <GridPane.margin>
+                                                     <Insets left="5.0" right="5.0" />
+                                                 </GridPane.margin>
+                                             </Button>
+                                             <Button fx:id="dashUpdateButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Update" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                                                 <font>
+                                                     <Font name="Times New Roman" size="14.0" />
+                                                 </font>
+                                                 <GridPane.margin>
+                                                     <Insets left="5.0" right="5.0" />
+                                                 </GridPane.margin>
+                                             </Button>
+                                             <Button fx:id="dashDeleteButton" mnemonicParsing="false" prefWidth="420.0" text="Delete" GridPane.columnIndex="3" GridPane.halignment="CENTER">
+                                                 <font>
+                                                     <Font name="Times New Roman" size="14.0" />
+                                                 </font>
+                                                 <GridPane.margin>
+                                                     <Insets left="5.0" right="5.0" />
+                                                 </GridPane.margin>
+                                             </Button>
+                                         </children>
+                                     </GridPane>
+                                     <Label fx:id="dashErrorField" alignment="CENTER" prefHeight="17.0" prefWidth="332.0" textFill="RED" visible="false" />
+                                 </children>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                             </VBox>
+                         </children>
+                     </Pane>
+            <Pane maxWidth="1.7976931348623157E308">
+               <FlowPane.margin>
+                  <Insets />
+               </FlowPane.margin>
+               <children>
+                           <ScrollPane fitToHeight="true" fitToWidth="true" maxWidth="1.7976931348623157E308">
+                               <content>
+                                     <TableView fixedCellSize="0.0" maxWidth="1.7976931348623157E308">
+                                         <columns>
+                                             <TableColumn maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="kazkas" />
+                                         </columns>
+                                     </TableView>
+                               </content>
+                           </ScrollPane>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </Pane>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </FlowPane>
+   </center>
+   <top>
+      <GridPane>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="E-SHOP" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER">
+               <font>
+                  <Font name="Imprint MT Shadow" size="36.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </Label>
+            <VBox alignment="CENTER_RIGHT" GridPane.columnIndex="1">
+               <children>
+                  <Label text="Logged in as:">
+                     <font>
+                        <Font name="Javanese Text" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="dashUsername" text="username" wrapText="true">
+                     <font>
+                        <Font name="Javanese Text" size="14.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="dashLogoutButton" mnemonicParsing="false" onAction="#loadLogin" prefHeight="30.0" prefWidth="82.0" text="Log out" />
+               </children>
+               <GridPane.margin>
+                  <Insets right="10.0" top="10.0" />
+               </GridPane.margin>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </GridPane>
+   </top>
+</BorderPane>
