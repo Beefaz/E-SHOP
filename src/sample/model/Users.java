@@ -18,6 +18,7 @@ public class Users {
         this.userAdmin = admin;
     }
 
+
     public Users(String userCreationTime, String userName, String userPassword, String userEmail, boolean admin) {
         this.userCreationTime = userCreationTime;
         this.userName = userName;
@@ -38,7 +39,6 @@ public class Users {
         this.userName = userName;
     }
 
-    //paieskai
     public Users() {
     }
 

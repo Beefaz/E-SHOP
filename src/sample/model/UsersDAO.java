@@ -94,4 +94,21 @@ public class UsersDAO {
         }
         return returningArray;
     }
+    public static ArrayList selectALL(int userID, String userName, String userEmail) {
+        String query = "SELECT user_id, user_name, user_creation_time, user_email, user_is_admin FROM users WHERE (user_id LIKE '%" + userID + "%' OR user_name LIKE '%" + userName + "%' OR user_email LIKE '%" + userEmail + "%')";
+        ArrayList<Users> returningArray = new ArrayList<>();
+        try {
+            Connection prisijungimas = DriverManager.getConnection(Constants.URL, "root", "");
+            PreparedStatement uzklausa = prisijungimas.prepareStatement(query);
+            ResultSet rezultatas = uzklausa.executeQuery(query);
+            while (rezultatas.next()) {
+                returningArray.add(new Users(rezultatas.getString("user_email")));
+            }
+            uzklausa.close();
+        } catch (SQLException e) {
+            System.out.println("failed5");
+            e.printStackTrace();
+        }
+        return returningArray;
+    }
 }
