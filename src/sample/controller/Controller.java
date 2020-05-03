@@ -3,7 +3,7 @@ package sample.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.VPos;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,25 +11,16 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import sample.model.Products;
-import sample.model.ProductsDAO;
 import sample.model.Users;
 import sample.model.UsersDAO;
 import sample.utils.Constants;
 import sample.utils.Validation;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-import java.io.ByteArrayInputStream;
-import java.util.ArrayList;
-
-public class Controller {
-
-    /*Products 1st window*/
-    @FXML private FlowPane mainFlowPane;
-    @FXML private ScrollPane mainScrollPane;
-    @FXML private Button mainJoinButton;
+public class Controller implements Initializable {
 
     /*login nodes*/
     @FXML private ImageView logImageForUsername;
@@ -57,6 +48,7 @@ public class Controller {
     @FXML private Button dashDeleteButton;
     @FXML private Button dashSearchButton;
     @FXML private TableView tableView;
+    @FXML private ToggleGroup deliveryMethods;
 
     /*global variables, images, etc...*/
     private Stage stage = new Stage();
@@ -64,12 +56,10 @@ public class Controller {
     private Image cross = new Image(getClass().getResource("../img/cross.png").toExternalForm());
 
     /*preloads nodes, events, etc.. into 1st window*/
-    public void initialize() {
-        //returned Arraylist manipulation, creates first window panes for each product. BRAIN IS DEAD....
-        ArrayList<Products> productsArrayList = ProductsDAO.selectNewProducts();
-        for (Products products : productsArrayList) {
-            createNewProductPane(products);
-        }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
     }
 
     /*loads login*/
@@ -86,12 +76,13 @@ public class Controller {
     }
 
     /*loads registration form*/
-    public void loadRegistration(ActionEvent actionEvent) {
+    public void loadRegistration(ActionEvent previousWindowCloser) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(Constants.REGISTRATION_FILE_LOCATION));
+            stage.setTitle("Registration");
             stage.setScene(new Scene(root));
             stage.show();
-            closePreviousWindow(actionEvent);
+            closePreviousWindow(previousWindowCloser);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -108,7 +99,7 @@ public class Controller {
             stage.show();
             closePreviousWindow(previousWindowCloser);
 
-            //This will work only after css is loaded. Adds username text
+            //This will work only after everything is loaded. Adds username text
             Label dashUsernameLabel = (Label) root.lookup("#dashUserNameLabel");
             if (dashUsernameLabel != null) dashUsernameLabel.setText(userName);
         } catch (Exception e) {
@@ -201,36 +192,5 @@ public class Controller {
         } else {
             logImageForPassword.setImage(check);
         }
-    }
-
-    public void createNewProductPane(Products products) {
-        GridPane gridPane = new GridPane();
-
-        Image image = new Image(new ByteArrayInputStream(products.getImage()));
-        ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(300);
-        imageView.setFitHeight(300);
-        imageView.setPreserveRatio(true);
-        gridPane.add(imageView, 0, 0, 3, 1);
-
-        Label newOffer = new Label("Naujas pasiūlymas");
-        newOffer.setId("new_offer");
-        newOffer.setMinHeight(100);
-        gridPane.setValignment(newOffer, VPos.TOP);
-        gridPane.add(newOffer, 0, 0);
-
-        Label productName = new Label(products.getProductName());
-        gridPane.add(productName, 0, 1);
-
-        Label productPrice = new Label(Double.toString(products.getProductPrice()) + "\u20AC");
-        gridPane.add(productPrice, 1, 1);
-
-        Label time = new Label("Time remaining");
-        gridPane.add(time, 2, 1);
-
-        Button welcomeToShop = new Button("Užekite į parduotuvę");
-        gridPane.add(welcomeToShop, 1, 2);
-
-        mainFlowPane.getChildren().add(gridPane);
     }
 }

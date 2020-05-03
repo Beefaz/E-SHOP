@@ -2,7 +2,6 @@
 #new_offer {
     -fx-text-fill: linear-gradient(to right, #f00, #ff0, #0f0, #00f);
     -fx-background-color: transparent;
-    -fx-background-size: 1000%;
     -fx-animated: animate 20s linear infinite;
     -fx-rotate: 340;
     -fx-font-size: 24;

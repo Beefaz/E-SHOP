@@ -20,6 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ToggleGroup?>
 <ScrollPane fx:id="dashScrollPane" fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.Controller">
     <content>
         <BorderPane maxWidth="1.7976931348623157E308">
@@ -203,27 +204,28 @@
                                         <RowConstraints vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                        <RadioButton fx:id="radioButton1" mnemonicParsing="false" text="Paštu" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                        <fx:define><ToggleGroup fx:id="deliveryMethods"/></fx:define>
+                                        <RadioButton id="deliveryMethods" mnemonicParsing="false" text="Paštu" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                             <padding>
                                                 <Insets bottom="5.0" left="2.0" right="2.0" top="5.0" />
                                             </padding>
                                         </RadioButton>
-                                        <RadioButton fx:id="radioButton2" mnemonicParsing="false" text="Paštomatu" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                        <RadioButton id="deliveryMethods" mnemonicParsing="false" text="Paštomatu" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                             <padding>
                                                 <Insets bottom="5.0" left="2.0" right="2.0" top="5.0" />
                                             </padding>
                                         </RadioButton>
-                                        <RadioButton fx:id="radioButton3" mnemonicParsing="false" text="Venipak" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                        <RadioButton id="deliveryMethods" mnemonicParsing="false" text="Venipak" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                             <padding>
                                                 <Insets bottom="5.0" left="2.0" right="2.0" top="5.0" />
                                             </padding>
                                         </RadioButton>
-                                        <RadioButton fx:id="radioButton4" mnemonicParsing="false" text="DPD" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                        <RadioButton id="deliveryMethods" mnemonicParsing="false" text="DPD" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                             <padding>
                                                 <Insets bottom="5.0" left="2.0" right="2.0" top="5.0" />
                                             </padding>
                                         </RadioButton>
-                                        <RadioButton fx:id="radioButton5" mnemonicParsing="false" text="Galimybe atsiimti sutartoje vietoje" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
+                                        <RadioButton id="deliveryMethods" mnemonicParsing="false" text="Galimybe atsiimti sutartoje vietoje" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
                                             <padding>
                                                 <Insets bottom="5.0" left="2.0" right="2.0" top="5.0" />
                                             </padding>

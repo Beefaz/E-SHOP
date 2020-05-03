@@ -1,20 +1,19 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import sample.utils.Constants;
+import sample.controller.ProductPanelController;
+
 
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent window = FXMLLoader.load(getClass().getResource(Constants.FIRST_WINDOW_FILE_LOCATION));
-        window.getStylesheets().add(getClass().getResource("css/main.css").toExternalForm());
+    public void start(Stage primaryStage) {
+        Scene scene = new Scene(ProductPanelController.createNewProductPane());
+        scene.getStylesheets().add(getClass().getResource("css/main.css").toExternalForm());
         primaryStage.setTitle("Welcome to E-Shop!");
-        primaryStage.setScene(new Scene(window));
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
