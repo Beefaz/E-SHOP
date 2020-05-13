@@ -6,6 +6,9 @@
     -fx-rotate: 340;
     -fx-font-size: 24;
 }
+#product_image_view{
+    -fx-border-color: black;
+}
 @keyframes animate {
     0% {
         -fx-background-position: 0% 100%;

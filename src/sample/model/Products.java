@@ -5,6 +5,8 @@ import java.util.Arrays;
 public class Products {
     private int productID;
     private int userID;
+    private String phone;
+    private String city;
     private String productName;
     private double productPrice;
     private String productCategory;
@@ -13,9 +15,11 @@ public class Products {
     private String advertisementTimestamp;
     private byte[] image;
 
-    public Products(int productID, int userID, String productName, double productPrice, String productCategory, String deliveryMethod, int advertisementLength, String advertisementTimestamp, byte[] image) {
+    public Products(int productID, int userID, String phone, String city, String productName, double productPrice, String productCategory, String deliveryMethod, int advertisementLength, String advertisementTimestamp, byte[] image) {
         this.productID = productID;
         this.userID = userID;
+        this.phone = phone;
+        this.city = city;
         this.productName = productName;
         this.productPrice = productPrice;
         this.productCategory = productCategory;
@@ -25,15 +29,29 @@ public class Products {
         this.image = image;
     }
 
-    public Products(int productID, int userID, String productName, double productPrice, String productCategory, String deliveryMethod, int advertisementLength, String advertisementTimestamp) {
+    public Products(int productID, int userID, String phone, String city, String productName, double productPrice, String productCategory, String deliveryMethod, int advertisementLength, String advertisementTimestamp) {
         this.productID = productID;
         this.userID = userID;
+        this.phone = phone;
+        this.city = city;
         this.productName = productName;
         this.productPrice = productPrice;
         this.productCategory = productCategory;
         this.deliveryMethod = deliveryMethod;
         this.advertisementLength = advertisementLength;
         this.advertisementTimestamp = advertisementTimestamp;
+    }
+
+    public Products(int userID, String phone, String city, String productName, double productPrice, String productCategory, String deliveryMethod, int advertisementLength, byte[] image) {
+        this.userID = userID;
+        this.phone = phone;
+        this.city = city;
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.productCategory = productCategory;
+        this.deliveryMethod = deliveryMethod;
+        this.advertisementLength = advertisementLength;
+        this.image = image;
     }
 
     public Products(int productID, String productName, double productPrice, int advertisementLength, String advertisementTimestamp, byte[] image) {
@@ -67,6 +85,23 @@ public class Products {
         this.userID = userID;
     }
 
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public String getProductName() {
         return productName;
     }
@@ -95,9 +130,7 @@ public class Products {
         return deliveryMethod;
     }
 
-    public void setDeliveryMethod(String deliveryMethod) {
-        this.deliveryMethod = deliveryMethod;
-    }
+    public void setDeliveryMethod(String deliveryMethod) { this.deliveryMethod = deliveryMethod; }
 
     public int getAdvertisementLength() {
         return advertisementLength;
@@ -124,6 +157,8 @@ public class Products {
         return "Products{" +
                 "productID=" + productID +
                 ", userID=" + userID +
+                ", phone='" + phone + '\'' +
+                ", city='" + city + '\'' +
                 ", productName='" + productName + '\'' +
                 ", productPrice=" + productPrice +
                 ", productCategory='" + productCategory + '\'' +

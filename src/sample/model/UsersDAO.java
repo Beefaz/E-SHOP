@@ -16,9 +16,7 @@ public class UsersDAO {
             uzklausa.setBoolean(4, users.getUserAdmin());
             uzklausa.executeUpdate();
             uzklausa.close();
-            System.out.println(Constants.ACTION_SUCCESSFUL);
         } catch (SQLException e) {
-            System.out.println(Constants.ACTION_FAILED);
             e.printStackTrace();
         }
     }
@@ -35,7 +33,6 @@ public class UsersDAO {
             }
             uzklausa.close();
         } catch (SQLException e) {
-            System.out.println("failed1");
             e.printStackTrace();
         }
         return returningArray;
@@ -53,25 +50,23 @@ public class UsersDAO {
             }
             uzklausa.close();
         } catch (SQLException e) {
-            System.out.println("failed2");
             e.printStackTrace();
         }
         return returningArray;
     }
 
     public static ArrayList selectUsernamePass(String userName) {
-        String query = "SELECT user_name, user_email FROM users WHERE user_name LIKE '" + userName + "'";
+        String query = "SELECT user_name, user_password FROM users WHERE user_name LIKE '" + userName + "'";
         ArrayList<Users> returningArray = new ArrayList<>();
         try {
             Connection prisijungimas = DriverManager.getConnection(Constants.URL, "root", "");
             PreparedStatement uzklausa = prisijungimas.prepareStatement(query);
             ResultSet rezultatas = uzklausa.executeQuery(query);
             while (rezultatas.next()) {
-                returningArray.add(new Users(rezultatas.getString("user_name")));
+                returningArray.add(new Users(rezultatas.getString("user_name"), rezultatas.getString("user_password")));
             }
             uzklausa.close();
         } catch (SQLException e) {
-            System.out.println("failed3");
             e.printStackTrace();
         }
         return returningArray;
@@ -85,30 +80,76 @@ public class UsersDAO {
             PreparedStatement uzklausa = prisijungimas.prepareStatement(query);
             ResultSet rezultatas = uzklausa.executeQuery(query);
             while (rezultatas.next()) {
-                returningArray.add(new Users(rezultatas.getString("user_email")));
+                returningArray.add(new Users(rezultatas.getString("user_email"), rezultatas.getString("user_password")));
             }
             uzklausa.close();
         } catch (SQLException e) {
-            System.out.println("failed4");
             e.printStackTrace();
         }
         return returningArray;
     }
     public static ArrayList selectALL(int userID, String userName, String userEmail) {
-        String query = "SELECT user_id, user_name, user_creation_time, user_email, user_is_admin FROM users WHERE (user_id LIKE '%" + userID + "%' OR user_name LIKE '%" + userName + "%' OR user_email LIKE '%" + userEmail + "%')";
+        String query = "SELECT * FROM users WHERE (user_id LIKE '%" + userID + "%' OR user_name LIKE '%" + userName + "%' OR user_email LIKE '%" + userEmail + "%')";
         ArrayList<Users> returningArray = new ArrayList<>();
         try {
             Connection prisijungimas = DriverManager.getConnection(Constants.URL, "root", "");
             PreparedStatement uzklausa = prisijungimas.prepareStatement(query);
             ResultSet rezultatas = uzklausa.executeQuery(query);
             while (rezultatas.next()) {
-                returningArray.add(new Users(rezultatas.getString("user_email")));
+                returningArray.add(new Users(rezultatas.getString("user_email"), rezultatas.getString("user_creation_time"), rezultatas.getString("user_name"), rezultatas.getString("user_email"), rezultatas.getBoolean("user_is_admin")));
             }
             uzklausa.close();
         } catch (SQLException e) {
-            System.out.println("failed5");
             e.printStackTrace();
         }
         return returningArray;
     }
+
+
+    public static Users selectUserID(String username) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        boolean isAdmin = false;
+        Users users = null;
+        try {
+            connection = DriverManager.getConnection(Constants.URL, "root", "");
+
+            preparedStatement = connection.prepareStatement("SELECT user_id FROM users WHERE user_name = ?");
+
+            preparedStatement.setString(1, username);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("user_id");
+                //int id, String username, String password, String email, boolean admin
+                users = new Users (id);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+    /*public static Users selectUserID(String userName) {
+        Users users = null;
+        String query = "SELECT user_id FROM users WHERE user_name = '" + userName + "'";
+        try {
+            Connection prisijungimas = DriverManager.getConnection(Constants.URL, "root", "");
+            PreparedStatement uzklausa = prisijungimas.prepareStatement(query);
+            ResultSet rezultatas = uzklausa.executeQuery(query);
+            System.out.println(rezultatas.toString());
+            while (rezultatas.next()) {
+                System.out.println(rezultatas.toString());
+                int userID = rezultatas.getInt("user_id");
+                System.out.println(userID);
+                users = new Users (rezultatas.getInt(userID));
+                System.out.println(users.toString());
+            }
+            uzklausa.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }*/
 }

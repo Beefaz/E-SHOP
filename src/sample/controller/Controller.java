@@ -1,5 +1,9 @@
 package sample.controller;
 
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableSet;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,56 +14,69 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import sample.model.Products;
+import sample.model.ProductsDAO;
 import sample.model.Users;
 import sample.model.UsersDAO;
 import sample.utils.Constants;
 import sample.utils.Validation;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+
 
 public class Controller implements Initializable {
 
     /*login nodes*/
-    @FXML private ImageView logImageForUsername;
-    @FXML private ImageView logImageForPassword;
-    @FXML private TextField logUsernameField;
-    @FXML private PasswordField logPasswordField;
-    @FXML private Label logErrorField;
-    @FXML private Button logLoginButton;
-    @FXML private Button logRegisterButton;
+    @FXML private ImageView log_icon_valid_username;
+    @FXML private ImageView log_icon_valid_password;
+    @FXML private TextField log_username_field;
+    @FXML private PasswordField log_password_field;
+    @FXML private Label log_error_field;
 
     /*registration nodes*/
-    @FXML private TextField regUsernameField;
-    @FXML private TextField regEmailField;
-    @FXML private PasswordField regPasswordField;
-    @FXML private PasswordField regPasswordField1;
-    @FXML private Label regErrorField;
-    @FXML private Button regRegisterButton;
-    @FXML private CheckBox regAdminRightsCheckbox;
+    @FXML private TextField reg_username_field;
+    @FXML private TextField reg_email_field;
+    @FXML private PasswordField reg_password_field;
+    @FXML private PasswordField reg_password_field1;
+    @FXML private Label reg_error_field;
+    @FXML private Button reg_register;
+    @FXML private CheckBox reg_admin_checkbox;
 
     /*dashboard nodes*/
-    @FXML private ScrollPane dashScrollPane;
-    @FXML private Label dashUserNameLabel;
-    @FXML private Button dashCreateButton;
-    @FXML private Button dashUpdateButton;
-    @FXML private Button dashDeleteButton;
-    @FXML private Button dashSearchButton;
-    @FXML private TableView tableView;
-    @FXML private ToggleGroup deliveryMethods;
+    @FXML private Label dash_username_label;
+    @FXML private TextField dash_phone;
+    @FXML private TextField dash_city;
+    @FXML private TextField dash_product_name;
+    @FXML private TextField dash_price_euro;
+    @FXML private TextField dash_price_cents;
+    @FXML private ImageView dash_image_drop;
+    @FXML private Label dash_image_box_text;
+    @FXML private CheckBox check_box1, check_box2, check_box3, check_box4, check_box5, check_box6, check_box7, check_box8, check_box9, check_box10, check_box11;
+    @FXML private RadioButton radio_button_1, radio_button_2, radio_button_3, radio_button_4, radio_button_5;
+    @FXML private ComboBox dash_advertisement_length;
+    @FXML private Label dash_error_field;
+    @FXML private Button dash_create_btn, dash_update_btn, dash_delete_btn, dash_search_btn;
+    @FXML private TableView dash_table;
+
 
     /*global variables, images, etc...*/
     private Stage stage = new Stage();
     private Image check = new Image(getClass().getResource("../img/check.png").toExternalForm());
     private Image cross = new Image(getClass().getResource("../img/cross.png").toExternalForm());
 
+
     /*preloads nodes, events, etc.. into 1st window*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
     }
 
     /*loads login*/
@@ -87,21 +104,18 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
     }
-
     /*loads dashboard*/
     public void loadDashboard(ActionEvent previousWindowCloser, String userName) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(Constants.DASHBOARD_FILE_LOCATION));
             stage.setTitle("Dashboard");
             stage.setMaximized(true);
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
+            stage.setScene(new Scene(root));
             stage.show();
             closePreviousWindow(previousWindowCloser);
-
             //This will work only after everything is loaded. Adds username text
-            Label dashUsernameLabel = (Label) root.lookup("#dashUserNameLabel");
-            if (dashUsernameLabel != null) dashUsernameLabel.setText(userName);
+            Label dash_username = (Label) root.lookup("#dash_username_label");
+            if (dash_username != null) dash_username.setText(userName);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -109,21 +123,21 @@ public class Controller implements Initializable {
 
     /*checks for valid fields' input in login form, displays errorcode accordingly*/
     public void loginErrorCheck(ActionEvent previousWindowCloser) {
-        String userName = logUsernameField.getText();
-        String userEmail = logUsernameField.getText();
-        String loginPass = logPasswordField.getText();
+        String userName = log_username_field.getText();
+        String userEmail = log_username_field.getText();
+        String loginPass = log_password_field.getText();
         if (userName.isEmpty()) {
-            logErrorField.setText("Please enter your username.");
+            log_error_field.setText("Please enter your username.");
         } else if (loginPass.isEmpty()) {
-            logErrorField.setText("Please enter your password.");
+            log_error_field.setText("Please enter your password.");
         } else if (!Validation.isValidUserName(userName) && !Validation.isValidEmail(userEmail)) {
-            logErrorField.setText("Invalid username or e-mail.");
+            log_error_field.setText("Invalid username or e-mail.");
         } else if (!UsersDAO.selectUsername(userName).toString().contains(userName) && !UsersDAO.selectEmail(userEmail).toString().contains(userEmail)) {
-            logErrorField.setText("Username or e-mail does not exist.");
+            log_error_field.setText("Username or e-mail does not exist.");
         } else if (!Validation.isValidPassword(loginPass)) {
-            logErrorField.setText("Invalid password. Minimum 5 letters and numbers.");
+            log_error_field.setText("Invalid password. Minimum 5 letters and numbers.");
         } else if (!UsersDAO.selectUsernamePass(userName).toString().contains(loginPass) && !UsersDAO.selectEmailPass(userEmail).toString().contains(loginPass)) {
-            logErrorField.setText("Wrong password");
+            log_error_field.setText("Wrong password");
         } else {
             loadDashboard(previousWindowCloser, userName);
         }
@@ -131,42 +145,39 @@ public class Controller implements Initializable {
 
     /*checks for valid fields' input in registration form, displays errorcode accordingly*/
     public void registrationErrorCheck() {
-        String userName = regUsernameField.getText();
-        String regPass = regPasswordField.getText();
-        String regPass1 = regPasswordField1.getText();
-        String userEmail = regEmailField.getText();
-        boolean isAdmin = regAdminRightsCheckbox.isSelected();
+        String userName = reg_username_field.getText();
+        String regPass = reg_password_field.getText();
+        String regPass1 = reg_password_field1.getText();
+        String userEmail = reg_email_field.getText();
+        boolean isAdmin = reg_admin_checkbox.isSelected();
         if (userName.isEmpty()) {
-            regErrorField.setText("Please enter your username.");
+            reg_error_field.setText("Please enter your username.");
         } else if (userEmail.isEmpty()) {
-            regErrorField.setText("Please enter your e-mail.");
+            reg_error_field.setText("Please enter your e-mail.");
         } else if (regPass.isEmpty()) {
-            regErrorField.setText("Please enter your password.");
+            reg_error_field.setText("Please enter your password.");
         } else if (regPass1.isEmpty()) {
-            regErrorField.setText("Please confirm your password.");
+            reg_error_field.setText("Please confirm your password.");
         } else if (!Validation.isValidUserName(userName)) {
-            regErrorField.setText("Invalid username. Minimum 5 letters and numbers");
+            reg_error_field.setText("Invalid username. Minimum 5 letters and numbers");
         } else if (UsersDAO.selectUsername(userName).toString().contains(userName)) {
-            regErrorField.setText("Username already exists.");
+            reg_error_field.setText("Username already exists.");
         } else if (!Validation.isValidEmail(userEmail)) {
-            regErrorField.setText("Invalid e-mail. Example: mail@example.com");
+            reg_error_field.setText("Invalid e-mail. Example: mail@example.com");
         } else if (UsersDAO.selectEmail(userEmail).toString().contains(userEmail)) {
-            regErrorField.setText("This e-mail is already in use.");
+            reg_error_field.setText("This e-mail is already in use.");
         } else if (!Validation.isValidPassword(regPass) && !Validation.isValidPassword(regPass1)) {
-            regErrorField.setText("Invalid password. Minimum 5 letters and numbers and/or #,_");
+            reg_error_field.setText("Invalid password. Minimum 5 letters and numbers and/or #,_");
         } else if (userName.contains(regPass) || regPass.contains(userName)) {
-            regErrorField.setText("Please do not use password similar to username.");
+            reg_error_field.setText("Please do not use password similar to username.");
         } else if (!regPass.equals(regPass1)) {
-            regErrorField.setText("Passwords don't match.");
+            reg_error_field.setText("Passwords don't match.");
         } else {
-            Users users = new Users(userName, regPass, userEmail, isAdmin);
-            UsersDAO.insert(users);
-            regErrorField.setTextFill(Color.GREEN);
-            regErrorField.setText("Registration successful.");
-            regErrorField.setVisible(true);
-            regRegisterButton.setText("Login");
-            regRegisterButton.setOnAction(previousWindowCloser -> loadDashboard(previousWindowCloser, userName)
-            );
+            UsersDAO.insert(new Users(userName, regPass, userEmail, isAdmin));
+            reg_error_field.setTextFill(Color.GREEN);
+            reg_error_field.setText("Registration successful.");
+            reg_register.setText("Login");
+            reg_register.setOnAction(previousWindowCloser -> loadDashboard(previousWindowCloser, userName));
         }
     }
 
@@ -178,19 +189,121 @@ public class Controller implements Initializable {
 
     /*checks if typed chars in username field are valid, changes the image accordingly*/
     public void checkValidTypingOfUsernameField() {
-        if (!Validation.isValidTypedUsernameEmail(logUsernameField.getText())) {
-            logImageForUsername.setImage(cross);
+        if (!Validation.isValidTypedUsernameEmail(log_username_field.getText())) {
+            log_icon_valid_username.setImage(cross);
         } else {
-            logImageForUsername.setImage(check);
+            log_icon_valid_username.setImage(check);
         }
     }
 
     /*checks if typed chars in password field are valid, changes the image accordingly*/
     public void checkValidTypingOfPasswordField() {
-        if (!Validation.isValidTypedPassword(logPasswordField.getText())) {
-            logImageForPassword.setImage(cross);
+        if (!Validation.isValidTypedPassword(log_password_field.getText())) {
+            log_icon_valid_password.setImage(cross);
         } else {
-            logImageForPassword.setImage(check);
+            log_icon_valid_password.setImage(check);
         }
+    }
+
+    //creates checkbox group, disables unchecked checkboxes (hardcoded cb's for now)
+    public void checkBoxDisable(ActionEvent event){
+        /*makes list of checkboxes, hardcoded for now*/
+        ObservableSet <CheckBox> checkBoxList = FXCollections.observableSet(check_box1, check_box2, check_box3, check_box4, check_box5, check_box6, check_box7, check_box8, check_box9, check_box10, check_box11);
+        for (CheckBox checkBox : checkBoxList) {
+            if (checkBox.isDisabled()) {
+                checkBox.setDisable(false);
+            } else if (!checkBox.isSelected()){
+                checkBox.setDisable(true);
+            }
+        }
+        CheckBox eventSourceBox = (CheckBox) event.getSource();
+        eventSourceBox.setDisable(false);
+    }
+
+    public void createProduct() {
+        String phone = dash_phone.getText();
+        String city = dash_city.getText();
+        String product = dash_product_name.getText();
+        String price_euro = dash_price_euro.getText();
+        String price_cents = dash_price_cents.getText();
+        ArrayList productCategory = new ArrayList();
+        ArrayList deliveryMethods = new ArrayList();
+
+        /*makes list of checkboxes, checks if any checkbox was selected, hardcoded (can't use static method) for now*/
+        ObservableSet <CheckBox> checkBoxList = FXCollections.observableSet(check_box1, check_box2, check_box3, check_box4, check_box5, check_box6, check_box7, check_box8, check_box9, check_box10, check_box11);
+        for (CheckBox checkBox : checkBoxList) {
+            if (checkBox.isSelected()){
+                productCategory.add(checkBox.getText());
+            }
+        }
+        /*makes list of radioboxes, checks if any radiobox was selected, hardcoded (can't use static method) for now*/
+        ObservableSet <RadioButton> radioButtonList = FXCollections.observableSet(radio_button_1, radio_button_2, radio_button_3, radio_button_4, radio_button_5);
+        for (RadioButton radioButton : radioButtonList) {
+            if (radioButton.isSelected()){
+                deliveryMethods.add(radioButton.getText());
+            }
+        }
+
+        /*validations*/
+        if (product.isEmpty()) {
+            dash_error_field.setText("Įveskite prekės pavadinimą");
+        } else if (phone.isEmpty()){
+            dash_error_field.setText("Įveskite kontaktinį telefoną");
+        } else if (!Validation.isValidPhone(phone)&&!Validation.isValidInternationalPhone(phone)){
+            dash_error_field.setText("Neteisingai įvestas telefono nr. Pvz +370**, 8**");
+        } else if (city.isEmpty()) {
+            dash_error_field.setText("Įveskite miestą");
+        } else if (dash_image_drop.getImage().isError()){
+            dash_error_field.setText("Nepasirinkote nuotraukos");
+        } else if (price_euro.isEmpty()){
+            dash_error_field.setText("Įveskite kainą");
+        } else if (productCategory.isEmpty()) {
+            dash_error_field.setText("Pasirinkite produktų grupę");
+        } else if (deliveryMethods.isEmpty()) {
+            dash_error_field.setText("Pasirinkime pristatymo būdą");
+        } else if (dash_advertisement_length.getSelectionModel().isEmpty()){
+            dash_error_field.setText("Pasirinkite skelbimo galiojimo laiką");
+        } else {
+            /*object doubles needs to be converted to ints WORKS, PARTIALLY, puts BIN instead of image, and it's empty
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            int height = (int) dash_image_drop.getImage().getHeight();
+            int width = (int) dash_image_drop.getImage().getWidth();
+            byte[]buffer = new byte [width * height * 4];
+            dash_image_drop.getImage().getPixelReader().getPixels(0, 0, width, height, PixelFormat.getByteBgraInstance(), buffer, 0, width * 4);
+            byteArrayOutputStream.writeBytes(buffer);
+            System.out.println(byteArrayOutputStream.toByteArray());
+            */
+
+            /*buffers image into byte array*/
+            ByteArrayOutputStream output = new ByteArrayOutputStream();
+            BufferedImage bufferedImage = SwingFXUtils.fromFXImage(dash_image_drop.getImage(), null);
+                try {
+                    ImageIO.write(bufferedImage, "jpg", output);
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
+                byte [] imageData = output.toByteArray();
+
+            String advertisementLength = dash_advertisement_length.getSelectionModel().getSelectedItem().toString();
+            Users userID = UsersDAO.selectUserID(dash_username_label.getText());
+            ProductsDAO.insert(new Products(userID.getUserID(), phone, city, product, Double.parseDouble(price_euro)+Double.parseDouble(price_cents)/100, productCategory.toString(), deliveryMethods.toString(), Integer.parseInt(advertisementLength), imageData));
+            dash_error_field.setText("");
+        }
+    }
+
+    public void delete(){
+    }
+
+    public void getImage(DragEvent dragEvent) {
+        if (dragEvent.getDragboard().hasFiles()) {
+            dragEvent.acceptTransferModes(TransferMode.ANY);
+        }
+    }
+
+    public void showImage (DragEvent dragEvent) throws FileNotFoundException {
+        List<File> files = dragEvent.getDragboard().getFiles();
+        Image img = new Image(new FileInputStream(files.get(0)));
+        dash_image_drop.setImage(img);
+        dash_image_box_text.setText("");
     }
 }

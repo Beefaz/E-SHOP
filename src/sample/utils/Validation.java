@@ -9,6 +9,8 @@ public class Validation {
     public static final String EMAIL_REGEX_PATTERN = "^[a-zA-Z0-9]{3,20}+@[a-zA-Z0-9]{3,20}+.[a-zA-Z0-9]{2,20}$";
     public static final String TYPED_USERNAME_EMAIL_REGEX_PATTERN = "^[a-zA-Z0-9@._]{1,20}$";
     public static final String TYPED_PASSWORD_REGEX_PATTERN = "^[a-zA-Z0-9#_]{1,20}$";
+    public static final String LOCAL_PHONE_PATTERN = "^[0-9]{9,10}$";
+    public static final String INTERNATIONAL_LT_PHONE_PATTERN = "^[0-9+]{12,13}$";
 
     public static boolean isValidUserName(String userName){
         Pattern pattern = Pattern.compile(USER_NAME_REGEX_PATTERN);
@@ -20,20 +22,32 @@ public class Validation {
         Matcher matcher = pattern.matcher(password);
         return matcher.find();
     }
-    public static boolean isValidEmail(String Email){
+    public static boolean isValidEmail(String email){
         Pattern pattern = Pattern.compile(EMAIL_REGEX_PATTERN);
-        Matcher matcher = pattern.matcher(Email);
+        Matcher matcher = pattern.matcher(email);
         return matcher.find();
     }
-    public static boolean isValidTypedUsernameEmail(String typedUsernameEmail){
+    public static boolean isValidTypedUsernameEmail(String usernameOrEmailTypo){
         Pattern pattern = Pattern.compile(TYPED_USERNAME_EMAIL_REGEX_PATTERN);
-        Matcher matcher = pattern.matcher(typedUsernameEmail);
+        Matcher matcher = pattern.matcher(usernameOrEmailTypo);
         return matcher.find();
     }
 
-    public static boolean isValidTypedPassword(String typedPassword){
+    public static boolean isValidTypedPassword(String passwordTypo){
         Pattern pattern = Pattern.compile(TYPED_PASSWORD_REGEX_PATTERN);
-        Matcher matcher = pattern.matcher(typedPassword);
+        Matcher matcher = pattern.matcher(passwordTypo);
+        return matcher.find();
+    }
+
+    public static boolean isValidPhone(String phone){
+        Pattern pattern = Pattern.compile(LOCAL_PHONE_PATTERN);
+        Matcher matcher = pattern.matcher(phone);
+        return matcher.find();
+    }
+
+    public static boolean isValidInternationalPhone(String phone){
+        Pattern pattern = Pattern.compile(INTERNATIONAL_LT_PHONE_PATTERN);
+        Matcher matcher = pattern.matcher(phone);
         return matcher.find();
     }
 }

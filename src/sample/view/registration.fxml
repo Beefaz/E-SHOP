@@ -33,15 +33,15 @@
                 <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <TextField fx:id="regUsernameField" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                <TextField fx:id="regEmailField" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                <PasswordField fx:id="regPasswordField" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                <PasswordField fx:id="regPasswordField1" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                <Label fx:id="regErrorField" textFill="RED" wrapText="true" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7">
+                <TextField fx:id="reg_username_field" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                <TextField fx:id="reg_email_field" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                <PasswordField fx:id="reg_password_field" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                <PasswordField fx:id="reg_password_field1" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                <Label fx:id="reg_error_field" textFill="RED" wrapText="true" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7">
                <GridPane.margin>
                   <Insets left="10.0" right="10.0" />
                </GridPane.margin></Label>
-                <Button fx:id="regRegisterButton" mnemonicParsing="false" onAction="#registrationErrorCheck" prefHeight="25.0" prefWidth="84.0" text="Register" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+                <Button fx:id="reg_register" mnemonicParsing="false" onAction="#registrationErrorCheck" prefHeight="25.0" prefWidth="84.0" text="Register" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
                 <Label prefHeight="17.0" prefWidth="121.0" text="E-mail" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <Label prefHeight="17.0" prefWidth="125.0" text="Username" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Label prefHeight="17.0" prefWidth="121.0" text="Password" GridPane.columnIndex="1" GridPane.rowIndex="4" />
@@ -57,7 +57,7 @@
                 <ImageView fx:id="regCheckIcon3" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                 <ImageView fx:id="regCheckIcon4" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="5" />
                 <Label prefHeight="17.0" prefWidth="121.0" text="Admin rights" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                <CheckBox fx:id="regAdminRightsCheckbox" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                <CheckBox fx:id="reg_admin_checkbox" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="6" />
             </children>
         </GridPane>
     </children>

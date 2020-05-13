@@ -35,8 +35,17 @@ public class Users {
         this.userAdmin = userAdmin;
     }
 
+    public Users(String userName, String userPassword) {
+        this.userName = userName;
+        this.userPassword = userPassword;
+    }
+
     public Users(String userName) {
         this.userName = userName;
+    }
+
+    public Users(int userID) {
+        this.userID = userID;
     }
 
     public Users() {

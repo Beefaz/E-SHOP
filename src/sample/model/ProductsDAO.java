@@ -4,33 +4,32 @@ import sample.utils.Constants;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Map;
 
 public class ProductsDAO {
+
     public static void insert(Products products) {
-        String query = "INSERT INTO products (user_id, product_name, product_price, product_category, delivery_method, advertisement_length, image) VALUES (?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO products (user_id, phone, city, product_name, product_price, product_category, delivery_method, advertisement_length, image) VALUES (?,?,?,?,?,?,?,?,?)";
         try {
             Connection connection = DriverManager.getConnection(Constants.URL, "root", "");
             PreparedStatement uzklausa = connection.prepareStatement(query);
             uzklausa.setInt(1, products.getUserID());
-            uzklausa.setString(2, products.getProductName());
-            uzklausa.setDouble(3, products.getProductPrice());
-            uzklausa.setString(4, products.getProductCategory());
-            uzklausa.setString(5, products.getDeliveryMethod());
-            uzklausa.setInt(6, products.getAdvertisementLength());
-            uzklausa.setBytes(7, products.getImage());
+            uzklausa.setString(2, products.getPhone());
+            uzklausa.setString(3, products.getCity());
+            uzklausa.setString(4, products.getProductName());
+            uzklausa.setDouble(5, products.getProductPrice());
+            uzklausa.setString(6, products.getProductCategory());
+            uzklausa.setString(7, products.getDeliveryMethod());
+            uzklausa.setInt(8, products.getAdvertisementLength());
+            uzklausa.setBytes(9, products.getImage());
             uzklausa.executeUpdate();
             uzklausa.close();
-            System.out.println(Constants.ACTION_SUCCESSFUL);
         } catch (SQLException e) {
-            System.out.println(Constants.ACTION_FAILED);
             e.printStackTrace();
         }
     }
 
-    public static ArrayList<Products> selectNewProducts() {
-        int imageViewCount = Constants.IMAGE_COUNT_SHOWN_IN_1ST_WINDOW;
-        String query = "SELECT product_name, product_price, image FROM products ORDER BY advertisement_timestamp DESC LIMIT " + imageViewCount;
+    public static ArrayList<Products> selectNewProducts(int LimitCount, int offsetCount) {
+        String query = "SELECT product_name, product_price, image FROM products WHERE (image is NOT NULL) ORDER BY advertisement_timestamp DESC LIMIT " + LimitCount + " OFFSET " + offsetCount;
         ArrayList<Products> returningArray = new ArrayList<>();
         try {
             Connection prisijungimas = DriverManager.getConnection(Constants.URL, "root", "");
@@ -41,7 +40,6 @@ public class ProductsDAO {
             }
             uzklausa.close();
         } catch (SQLException e) {
-            System.out.println("failed1");
             e.printStackTrace();
         }
         return returningArray;
