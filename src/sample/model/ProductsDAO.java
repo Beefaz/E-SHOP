@@ -44,4 +44,67 @@ public class ProductsDAO {
         }
         return returningArray;
     }
+
+    public ResultSet selectByProductUser(String productName, Users users) {
+        String uzklausa = "";
+        if (users.getUserAdmin()) {
+            if (productName.equals("")) {
+                uzklausa = "SELECT * FROM products";
+            } else {
+                uzklausa = "SELECT * FROM products WHERE product_name LIKE '" + productName + "'";
+            }
+        } else {
+            if (productName.equals("")) {
+                uzklausa = "SELECT * FROM products WHERE user_id = '" + users.getUserID() + "'";
+            } else {
+                uzklausa = "SELECT * FROM products WHERE user_id = '" + users.getUserID() + "' AND product_name LIKE '" + productName + "'";
+            }
+        }
+        ResultSet rezultatas = null;
+        Connection prisijungimas = null;
+        PreparedStatement uzklausa2 = null;
+        try {
+            prisijungimas = DriverManager.getConnection(Constants.URL, "root", "");
+            uzklausa2 = prisijungimas.prepareStatement(uzklausa);
+            rezultatas = uzklausa2.executeQuery(uzklausa);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return rezultatas;
+    }
+
+    public void editByID(Products products) {
+        String uzklausa = "UPDATE products SET phone=?, city=?, product_name=?, product_price=?, product_category=?, delivery_method=?, advertisement_length=? " +
+                " WHERE product_id=?";
+
+        try {
+            Connection prisijungimas = DriverManager.getConnection(Constants.URL, "root", "");
+            PreparedStatement preparedStatement = prisijungimas.prepareStatement(uzklausa);
+            preparedStatement.setString(1, products.getPhone());
+            preparedStatement.setString(2, products.getCity());
+            preparedStatement.setString(3, products.getProductName());
+            preparedStatement.setDouble(4, products.getProductPrice());
+            preparedStatement.setString(5, products.getProductCategory());
+            preparedStatement.setString(6, products.getDeliveryMethod());
+            preparedStatement.setInt(7, products.getAdvertisementLength());
+            preparedStatement.setInt(8, products.getProductID());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteById(int productId) {
+        String uzklausa = "DELETE FROM products WHERE id=?";
+        try {
+            Connection prisijungimas = DriverManager.getConnection(Constants.URL, "root", "");
+            PreparedStatement preparedStatement = prisijungimas.prepareStatement(uzklausa);
+            preparedStatement.setInt(1, productId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

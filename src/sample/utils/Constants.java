@@ -5,6 +5,6 @@ public class Constants {
     public static final String LOGIN_FILE_LOCATION = "../view/login.fxml";
     public static final String DASHBOARD_FILE_LOCATION = "../view/dashboard.fxml";
     public static final String REGISTRATION_FILE_LOCATION = "../view/registration.fxml";
-    public static final int IMAGE_COUNT_SHOWN_IN_1ST_WINDOW = 6;
+    public static final int IMAGE_COUNT_SHOWN_IN_1ST_WINDOW = 4;
 
 }

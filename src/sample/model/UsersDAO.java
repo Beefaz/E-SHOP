@@ -1,6 +1,7 @@
 package sample.model;
 
 import sample.utils.Constants;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -88,6 +89,7 @@ public class UsersDAO {
         }
         return returningArray;
     }
+
     public static ArrayList selectALL(int userID, String userName, String userEmail) {
         String query = "SELECT * FROM users WHERE (user_id LIKE '%" + userID + "%' OR user_name LIKE '%" + userName + "%' OR user_email LIKE '%" + userEmail + "%')";
         ArrayList<Users> returningArray = new ArrayList<>();
@@ -106,50 +108,50 @@ public class UsersDAO {
     }
 
 
-    public static Users selectUserID(String username) {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
+    public static Users selectUserID(String userName) {
+        Connection prisijungimas = null;
+        PreparedStatement uzklausa = null;
+        ResultSet rezultatas = null;
         boolean isAdmin = false;
         Users users = null;
         try {
-            connection = DriverManager.getConnection(Constants.URL, "root", "");
-
-            preparedStatement = connection.prepareStatement("SELECT user_id FROM users WHERE user_name = ?");
-
-            preparedStatement.setString(1, username);
-            resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                int id = resultSet.getInt("user_id");
-                //int id, String username, String password, String email, boolean admin
-                users = new Users (id);
+            prisijungimas = DriverManager.getConnection(Constants.URL, "root", "");
+            uzklausa = prisijungimas.prepareStatement("SELECT user_id, user_is_admin FROM users WHERE user_name = ?");
+            uzklausa.setString(1, userName);
+            rezultatas = uzklausa.executeQuery();
+            while (rezultatas.next()) {
+                int id = rezultatas.getInt("user_id");
+                boolean userAdmin = rezultatas.getBoolean("user_is_admin");
+                users = new Users(id, userAdmin);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return users;
     }
-    /*public static Users selectUserID(String userName) {
+
+    public Users selectUserDetails(String userName) {
+        Connection prisijungimas = null;
+        PreparedStatement uzklausa = null;
+        ResultSet rezultatas = null;
         Users users = null;
-        String query = "SELECT user_id FROM users WHERE user_name = '" + userName + "'";
         try {
-            Connection prisijungimas = DriverManager.getConnection(Constants.URL, "root", "");
-            PreparedStatement uzklausa = prisijungimas.prepareStatement(query);
-            ResultSet rezultatas = uzklausa.executeQuery(query);
-            System.out.println(rezultatas.toString());
+            prisijungimas = DriverManager.getConnection(Constants.URL, "root", "");
+            uzklausa = prisijungimas.prepareStatement("SELECT * FROM users WHERE user_name = ?");
+            uzklausa.setString(1, userName);
+            rezultatas = uzklausa.executeQuery();
             while (rezultatas.next()) {
-                System.out.println(rezultatas.toString());
+                userName = rezultatas.getString("user_name");
                 int userID = rezultatas.getInt("user_id");
-                System.out.println(userID);
-                users = new Users (rezultatas.getInt(userID));
-                System.out.println(users.toString());
+                String userCreationTime = rezultatas.getString("user_creation_time");
+                String userPassword = rezultatas.getString("user_password");
+                String userEmail = rezultatas.getString("user_email");
+                boolean userAdmin = rezultatas.getBoolean("user_is_admin");
+                users = new Users(userID, userCreationTime, userName, userPassword, userEmail, userAdmin);
             }
-            uzklausa.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return users;
-    }*/
+    }
 }

@@ -9,7 +9,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
 import sample.model.Products;
 import sample.model.ProductsDAO;
 import java.io.ByteArrayInputStream;
@@ -52,9 +51,9 @@ public class ProductPanelController {
             gridPane.add(productName, 0, 1);
             gridPane.add(productPrice, 1, 1);
             gridPane.add(time, 0, 2);
-            gridPane.add(order,1, 2);
-            GridPane.setVgrow(imageView, Priority.ALWAYS);
+            gridPane.add(order, 1, 2);
             gridPane.setStyle("-fx-border-color: black");
+
             flowPane.getChildren().add(gridPane);
         }
 

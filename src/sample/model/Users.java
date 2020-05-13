@@ -44,8 +44,9 @@ public class Users {
         this.userName = userName;
     }
 
-    public Users(int userID) {
+    public Users(int userID, boolean userAdmin) {
         this.userID = userID;
+        this.userAdmin = userAdmin;
     }
 
     public Users() {

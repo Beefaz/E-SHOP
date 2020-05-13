@@ -54,6 +54,17 @@ public class Products {
         this.image = image;
     }
 
+    public Products(int productID, String phone, String city, String productName, double productPrice, String productCategory, String deliveryMethod, int advertisementLength) {
+        this.productID = productID;
+        this.phone = phone;
+        this.city = city;
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.productCategory = productCategory;
+        this.deliveryMethod = deliveryMethod;
+        this.advertisementLength = advertisementLength;
+    }
+
     public Products(int productID, String productName, double productPrice, int advertisementLength, String advertisementTimestamp, byte[] image) {
         this.productID = productID;
         this.productName = productName;
@@ -67,6 +78,10 @@ public class Products {
         this.productName = productName;
         this.productPrice = productPrice;
         this.image = image;
+    }
+
+    public Products(int productID) {
+        this.productID = productID;
     }
 
     public Products() {
@@ -130,7 +145,9 @@ public class Products {
         return deliveryMethod;
     }
 
-    public void setDeliveryMethod(String deliveryMethod) { this.deliveryMethod = deliveryMethod; }
+    public void setDeliveryMethod(String deliveryMethod) {
+        this.deliveryMethod = deliveryMethod;
+    }
 
     public int getAdvertisementLength() {
         return advertisementLength;
