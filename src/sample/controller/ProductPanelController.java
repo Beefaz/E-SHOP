@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import sample.model.Products;
 import sample.model.ProductsDAO;
 import java.io.ByteArrayInputStream;
@@ -46,6 +47,8 @@ public class ProductPanelController {
             gridPane.setPadding(new Insets(10));
             gridPane.setHalignment(order, HPos.RIGHT);
             gridPane.setHalignment(productPrice, HPos.RIGHT);
+            GridPane.setVgrow(imageView, Priority.ALWAYS);
+            GridPane.setHgrow(imageView, Priority.ALWAYS);
             gridPane.add(imageView, 0, 0, 2, 1);
             gridPane.add(newOffer, 0, 0);
             gridPane.add(productName, 0, 1);

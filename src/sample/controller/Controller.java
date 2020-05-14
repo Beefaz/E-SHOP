@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,6 +22,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import sample.model.Products;
 import sample.model.ProductsDAO;
@@ -368,8 +371,7 @@ public class Controller implements Initializable {
         String price_cents = dash_price_cents.getText();
         ArrayList productCategory = new ArrayList();
         ArrayList deliveryMethods = new ArrayList();
-        String advertisementLength = dash_advertisement_length.getSelectionModel().getSelectedItem().toString();
-        int productID = Integer.parseInt(dash_id_field.getText());
+        String productID = dash_id_field.getText();
 
         /*makes list of checkboxes, checks if any checkbox was selected, hardcoded (can't use static method) for now*/
         ObservableSet<CheckBox> checkBoxList = FXCollections.observableSet(check_box1, check_box2, check_box3, check_box4, check_box5, check_box6, check_box7, check_box8, check_box9, check_box10, check_box11);
@@ -385,45 +387,46 @@ public class Controller implements Initializable {
                 deliveryMethods.add(radioButton.getText());
             }
         }
-        if (phone.isEmpty()) {
+        if (productID.isEmpty()) {
+            dash_error_field.setText("Pasirinkite produkto ID redagavimui");
+        } else if (product.isEmpty()) {
+            dash_error_field.setText("Įveskite prekės pavadinimą");
+        } else if (phone.isEmpty()) {
             dash_error_field.setText("Įveskite kontaktinį telefoną");
         } else if (!Validation.isValidPhone(phone) && !Validation.isValidInternationalPhone(phone)) {
             dash_error_field.setText("Neteisingai įvestas telefono nr. Pvz +370**, 8**");
         } else if (city.isEmpty()) {
             dash_error_field.setText("Įveskite miestą");
-        } else if (dash_image_drop.getImage().isError()) {
-            dash_error_field.setText("Nepasirinkote nuotraukos");
         } else if (price_euro.isEmpty()) {
             dash_error_field.setText("Įveskite kainą");
         } else if (productCategory.isEmpty()) {
             dash_error_field.setText("Pasirinkite produktų grupę");
         } else if (deliveryMethods.isEmpty()) {
             dash_error_field.setText("Pasirinkime pristatymo būdą");
-        } else if (dash_advertisement_length.getSelectionModel().isEmpty()) {
-            dash_error_field.setText("Pasirinkite skelbimo galiojimo laiką");
         } else {
-            Products products = new Products(productID, phone, city, product, Double.parseDouble(price_euro) + Double.parseDouble(price_cents) / 100, productCategory.toString(), deliveryMethods.toString(), Integer.parseInt(advertisementLength));
+            Products products = new Products(Integer.parseInt(productID), phone, city, product, Double.parseDouble(price_euro) + Double.parseDouble(price_cents) / 100, productCategory.toString(), deliveryMethods.toString());
             ProductsDAO productsDAO = new ProductsDAO();
             productsDAO.editByID(products);
             try {
                 getProductTable("");
-            } catch (SQLException e) {
+            } catch (Exception e) {
+                dash_error_field.setText("Toks įrašas neegzistuoja");
                 e.printStackTrace();
             }
         }
     }
 
     public void searchDB() throws SQLException {
-        if (dash_product_name.getText().isEmpty()) {
-            dash_error_field.setText("Įveskite produkto pavadinimą paieškai");
-        } else {
-            getProductTable(dash_product_name.getText());
-        }
+        getProductTable(dash_product_name.getText());
     }
 
     public void delete() throws SQLException {
-        if (dash_id_field.getText().isEmpty()) {
+        dash_error_field.setText("");
+        String id = dash_id_field.getText();
+        if (id.isEmpty()) {
             dash_error_field.setText("Įveskite produkto ID");
+        } else if (!Validation.isValidID(id)) {
+            dash_error_field.setText("ID privalo suaryti skaičiai");
         } else {
             int productID = Integer.parseInt(dash_id_field.getText());
             ProductsDAO productsDAO = new ProductsDAO();

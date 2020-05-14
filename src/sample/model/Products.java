@@ -54,7 +54,7 @@ public class Products {
         this.image = image;
     }
 
-    public Products(int productID, String phone, String city, String productName, double productPrice, String productCategory, String deliveryMethod, int advertisementLength) {
+    public Products(int productID, String phone, String city, String productName, double productPrice, String productCategory, String deliveryMethod) {
         this.productID = productID;
         this.phone = phone;
         this.city = city;

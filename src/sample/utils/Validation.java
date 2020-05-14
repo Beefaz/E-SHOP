@@ -11,6 +11,7 @@ public class Validation {
     public static final String TYPED_PASSWORD_REGEX_PATTERN = "^[a-zA-Z0-9#_]{1,20}$";
     public static final String LOCAL_PHONE_PATTERN = "^[0-9]{9,10}$";
     public static final String INTERNATIONAL_LT_PHONE_PATTERN = "^[0-9+]{12,13}$";
+    public static final String ID_REGEX_PATTERN = "^[0-9]{1,15}$";
 
     public static boolean isValidUserName(String userName){
         Pattern pattern = Pattern.compile(USER_NAME_REGEX_PATTERN);
@@ -48,6 +49,12 @@ public class Validation {
     public static boolean isValidInternationalPhone(String phone){
         Pattern pattern = Pattern.compile(INTERNATIONAL_LT_PHONE_PATTERN);
         Matcher matcher = pattern.matcher(phone);
+        return matcher.find();
+    }
+
+    public static boolean isValidID(String id){
+        Pattern pattern = Pattern.compile(ID_REGEX_PATTERN);
+        Matcher matcher = pattern.matcher(id);
         return matcher.find();
     }
 }

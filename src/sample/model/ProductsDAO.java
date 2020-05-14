@@ -75,7 +75,7 @@ public class ProductsDAO {
     }
 
     public void editByID(Products products) {
-        String uzklausa = "UPDATE products SET phone=?, city=?, product_name=?, product_price=?, product_category=?, delivery_method=?, advertisement_length=? " +
+        String uzklausa = "UPDATE products SET phone=?, city=?, product_name=?, product_price=?, product_category=?, delivery_method=? " +
                 " WHERE product_id=?";
 
         try {
@@ -87,8 +87,7 @@ public class ProductsDAO {
             preparedStatement.setDouble(4, products.getProductPrice());
             preparedStatement.setString(5, products.getProductCategory());
             preparedStatement.setString(6, products.getDeliveryMethod());
-            preparedStatement.setInt(7, products.getAdvertisementLength());
-            preparedStatement.setInt(8, products.getProductID());
+            preparedStatement.setInt(7, products.getProductID());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -97,7 +96,7 @@ public class ProductsDAO {
     }
 
     public void deleteById(int productId) {
-        String uzklausa = "DELETE FROM products WHERE id=?";
+        String uzklausa = "DELETE FROM products WHERE product_id=?";
         try {
             Connection prisijungimas = DriverManager.getConnection(Constants.URL, "root", "");
             PreparedStatement preparedStatement = prisijungimas.prepareStatement(uzklausa);
