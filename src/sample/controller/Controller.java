@@ -276,8 +276,7 @@ public class Controller implements Initializable {
         eventSourceBox.setDisable(false);
     }
 
-    public void createProduct(ActionEvent event) {
-        String text = ((Button) event.getSource()).getText();
+    public void createProduct() {
         String phone = dash_phone.getText();
         String city = dash_city.getText();
         String product = dash_product_name.getText();
@@ -310,8 +309,6 @@ public class Controller implements Initializable {
             dash_error_field.setText("Neteisingai įvestas telefono nr. Pvz +370**, 8**");
         } else if (city.isEmpty()) {
             dash_error_field.setText("Įveskite miestą");
-        } else if (dash_image_drop.getImage().isError()) {
-            dash_error_field.setText("Nepasirinkote nuotraukos");
         } else if (price_euro.isEmpty()) {
             dash_error_field.setText("Įveskite kainą");
         } else if (productCategory.isEmpty()) {
@@ -320,9 +317,9 @@ public class Controller implements Initializable {
             dash_error_field.setText("Pasirinkime pristatymo būdą");
         } else if (dash_advertisement_length.getSelectionModel().isEmpty()) {
             dash_error_field.setText("Pasirinkite skelbimo galiojimo laiką");
-        } else {
+        }
 
-            /*object double need to be converted to ints. WORKS, PARTIALLY, puts BIN instead of image to SQ:, and it's empty. Keeping this for personal interest :)
+            /*object double need to be converted to ints. WORKS, PARTIALLY, puts BIN instead of image to SQL:, and it's empty. Keeping this for personal interest :)
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             int height = (int) dash_image_drop.getImage().getHeight();
             int width = (int) dash_image_drop.getImage().getWidth();
@@ -332,21 +329,29 @@ public class Controller implements Initializable {
             System.out.println(byteArrayOutputStream.toByteArray());
             */
 
-            /*buffers image into byte array*/
-            ByteArrayOutputStream output = new ByteArrayOutputStream();
+        /*buffers image into byte array*/
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        try {
             BufferedImage bufferedImage = SwingFXUtils.fromFXImage(dash_image_drop.getImage(), null);
-            try {
-                ImageIO.write(bufferedImage, "jpg", output);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            byte[] imageData = output.toByteArray();
+            ImageIO.write(bufferedImage, "jpg", output);
+        } catch (IOException e) {
+            e.getSuppressed();
+        } finally {
+            dash_error_field.setText("Nepasirinkote nuotraukos");
+        }
+        byte[] imageData = output.toByteArray();
 
-            String advertisementLength = dash_advertisement_length.getSelectionModel().getSelectedItem().toString();
-            Users userID = UsersDAO.selectUserID(dash_username_label.getText());
-            ProductsDAO.insert(new Products(userID.getUserID(), phone, city, product, Double.parseDouble(price_euro) + Double.parseDouble(price_cents) / 100, productCategory.toString(), deliveryMethods.toString(), Integer.parseInt(advertisementLength), imageData));
-            dash_error_field.setTextFill(Color.GREEN);
-            dash_error_field.setText("Skelbimas patalpintas");
+        String advertisementLength = dash_advertisement_length.getSelectionModel().getSelectedItem().toString();
+        Users userID = UsersDAO.selectUserID(dash_username_label.getText());
+        dash_image_drop.setImage(null);
+        ProductsDAO.insert(new Products(userID.getUserID(), phone, city, product, Double.parseDouble(price_euro) + Double.parseDouble(price_cents) / 100, productCategory.toString(), deliveryMethods.toString(), Integer.parseInt(advertisementLength), imageData));
+        dash_error_field.setTextFill(Color.GREEN);
+        dash_error_field.setText("Skelbimas patalpintas");
+        nullifyDashboardFields();
+        try {
+            getProductTable(product);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -399,6 +404,8 @@ public class Controller implements Initializable {
             dash_error_field.setText("Įveskite miestą");
         } else if (price_euro.isEmpty()) {
             dash_error_field.setText("Įveskite kainą");
+        } else if (!Validation.isValidEuroValue(price_euro)&&!Validation.isValidCentsValue(price_cents)) {
+            dash_error_field.setText("Blogai įvedėte kainą");
         } else if (productCategory.isEmpty()) {
             dash_error_field.setText("Pasirinkite produktų grupę");
         } else if (deliveryMethods.isEmpty()) {
@@ -476,5 +483,13 @@ public class Controller implements Initializable {
         } else {
             dash_error_field.setText("No rows to display");
         }
+    }
+
+    public void nullifyDashboardFields() {
+        dash_product_name.setText("");
+        dash_phone.setText("");
+        dash_price_euro.setText("");
+        dash_price_cents.setText("");
+        dash_city.setText("");
     }
 }

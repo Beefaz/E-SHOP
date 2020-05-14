@@ -11,6 +11,8 @@ public class Validation {
     public static final String TYPED_PASSWORD_REGEX_PATTERN = "^[a-zA-Z0-9#_]{1,20}$";
     public static final String LOCAL_PHONE_PATTERN = "^[0-9]{9,10}$";
     public static final String INTERNATIONAL_LT_PHONE_PATTERN = "^[0-9+]{12,13}$";
+    public static final String EURO_PATTERN = "^[0-9]{0,15}$";
+    public static final String CENTS_PATTERN = "^[0-9]{0,2}$";
     public static final String ID_REGEX_PATTERN = "^[0-9]{1,15}$";
 
     public static boolean isValidUserName(String userName){
@@ -40,6 +42,13 @@ public class Validation {
         return matcher.find();
     }
 
+
+    public static boolean isValidID(String id){
+        Pattern pattern = Pattern.compile(ID_REGEX_PATTERN);
+        Matcher matcher = pattern.matcher(id);
+        return matcher.find();
+    }
+
     public static boolean isValidPhone(String phone){
         Pattern pattern = Pattern.compile(LOCAL_PHONE_PATTERN);
         Matcher matcher = pattern.matcher(phone);
@@ -51,10 +60,14 @@ public class Validation {
         Matcher matcher = pattern.matcher(phone);
         return matcher.find();
     }
-
-    public static boolean isValidID(String id){
-        Pattern pattern = Pattern.compile(ID_REGEX_PATTERN);
-        Matcher matcher = pattern.matcher(id);
+    public static boolean isValidEuroValue(String euro){
+        Pattern pattern = Pattern.compile(EURO_PATTERN);
+        Matcher matcher = pattern.matcher(euro);
+        return matcher.find();
+    }
+    public static boolean isValidCentsValue(String cents){
+        Pattern pattern = Pattern.compile(CENTS_PATTERN);
+        Matcher matcher = pattern.matcher(cents);
         return matcher.find();
     }
 }

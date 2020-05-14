@@ -17,12 +17,11 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fx:id="dash_scroll_pane" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"  xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.Controller">
+<ScrollPane fx:id="dash_scroll_pane" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.Controller">
     <content>
         <GridPane maxWidth="1.7976931348623157E308">
             <columnConstraints>
@@ -136,7 +135,7 @@
                                                 <Insets left="2.0" right="2.0" />
                                             </GridPane.margin>
                                         </Label>
-                                        <TextField fx:id="dash_phone" promptText="  " GridPane.rowIndex="3">
+                                        <TextField fx:id="dash_phone" GridPane.rowIndex="3">
                                             <GridPane.margin>
                                                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                             </GridPane.margin>
@@ -491,29 +490,26 @@
                                                 </FXCollections>
                                             </items>
                                         </ComboBox>
-                                        <Pane>
-                                            <VBox.margin>
-                                                <Insets />
-                                            </VBox.margin>
-                                            <children>
-                                                <Label fx:id="dash_error_field" alignment="CENTER" prefWidth="420.0" textFill="RED">
-                                                    <padding>
-                                                        <Insets bottom="10.0" top="10.0" />
-                                                    </padding>
+                              <HBox alignment="CENTER_LEFT" prefWidth="450.0" spacing="10.0">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <children>
+                                                <TextField fx:id="dash_id_field" promptText="ID" visible="false" HBox.hgrow="NEVER">
+                                                    <font>
+                                                        <Font size="14.0" />
+                                                    </font>
+                                                </TextField>
+                                                <Label fx:id="dash_error_field" alignment="CENTER_RIGHT" contentDisplay="CENTER" textFill="RED" HBox.hgrow="ALWAYS">
                                                     <font>
                                                         <Font size="13.0" />
                                                     </font>
                                                 </Label>
-                                                <TextField fx:id="dash_id_field" prefHeight="40.0" prefWidth="74.0" promptText="ID" visible="false">
-                                                    <font>
-                                                        <Font size="14.0" />
-                                                    </font>
-                                                    <padding>
-                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                    </padding>
-                                                </TextField>
-                                            </children>
-                                        </Pane>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
                                         <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                                             <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="70.0" />
