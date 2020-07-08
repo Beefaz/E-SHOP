@@ -336,11 +336,9 @@ public class Controller implements Initializable {
             ImageIO.write(bufferedImage, "jpg", output);
         } catch (IOException e) {
             e.getSuppressed();
-        } finally {
             dash_error_field.setText("Nepasirinkote nuotraukos");
         }
         byte[] imageData = output.toByteArray();
-
         String advertisementLength = dash_advertisement_length.getSelectionModel().getSelectedItem().toString();
         Users userID = UsersDAO.selectUserID(dash_username_label.getText());
         dash_image_drop.setImage(null);
