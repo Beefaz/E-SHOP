@@ -1,5 +1,5 @@
 java e-shop desktop app
-primary window of new offers (buy now!)
+primary window of newest offers in database (buy now!)
 second window of login/registration
 dashboard with tables and crud
 mvc, crud, validations, regex, image storage in db, admin/regular user options.
