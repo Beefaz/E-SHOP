@@ -4,4 +4,4 @@ second window of login/registration
 dashboard with tables and crud
 validations, regex, image storage to db, admin/regular user options.
 
-technologies: sql, javafx, java
+technologies: mysql, javafx, java
