@@ -1,4 +1,4 @@
-java e-shop desktop app
+java, javafx e-shop desktop app
 
 window examples in images
 
