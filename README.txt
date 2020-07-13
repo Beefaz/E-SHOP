@@ -1,7 +1,7 @@
 e-shop desktop app
 technologies: java, javafx, mysql
 
-window examples in example*.jpg
+window examples in window*.jpg
 
 primary window of newest offers in database (viewable component amount is hardcoded atm)
 second window of login/registration (autocheck for input chars, instant login option after registration)
